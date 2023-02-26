@@ -25,7 +25,7 @@ export default function Layout({ children, title }) {
         <header>
           <nav className="flex h-12 items-center px-4 justify-between shadow-md">
             <Link href="/">
-              <p className="text-lg font-bold">ANT Ecommerce</p>
+              <p className="text-lg font-bold text-black">ANT Ecommerce</p>
             </Link>
             <div className="flex">
               <Link href="/cart">
