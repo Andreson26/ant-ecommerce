@@ -7,13 +7,17 @@ export default function Layout({ children, title }) {
     const { state } = useContext(Store);
     const { cart } = state;
     const [year, setYear] = useState();
+    const [cartItemsCount, setCartItemsCount] = useState(0);
 
     useEffect(() => {
+       setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
+       
         const interval = setInterval(() => {
             setYear(new Date().getFullYear())
         }, 1000)
         return () => clearInterval(interval)
-    }, [])
+        
+    }, [cart.cartItems])
 
   return (
     <>
@@ -34,9 +38,9 @@ export default function Layout({ children, title }) {
               <Link href="/cart">
                 <p className="p-2">
                     Cart
-                    {cart.cartItems.length > 0 && (
+                    {cartItemsCount > 0 && (
                         <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
-                            {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                            {cartItemsCount}
                         </span>
                   )}
                 </p>
