@@ -1,8 +1,11 @@
-import React, { useState, useEffect} from "react";
+import  { useState, useEffect, useContext} from "react";
 import Head from "next/head";
 import Link from "next/link";
+import  { Store }  from "@/utils/Store";
 
 export default function Layout({ children, title }) {
+    const { state } = useContext(Store);
+    const { cart } = state;
     const [year, setYear] = useState();
 
     useEffect(() => {
@@ -29,7 +32,14 @@ export default function Layout({ children, title }) {
             </Link>
             <div className="flex">
               <Link href="/cart">
-                <p className="p-2">Cart</p>
+                <p className="p-2">
+                    Cart
+                    {cart.cartItems.length > 0 && (
+                        <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
+                            {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                        </span>
+                  )}
+                </p>
               </Link>
               <Link href="/login">
                 <p className="p-2">Login</p>
