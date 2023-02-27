@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import { Store } from "@/utils/Store";
-import { XCircleIcon } from '@heroicons/react/outline'
+import { XCircleIcon } from "@heroicons/react/outline";
 import Layout from "@/components/Layout";
 
 export default function cart() {
@@ -15,6 +15,12 @@ export default function cart() {
 
   const removeItemHandler = (item) => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
+  };
+
+  const updateCarthandler = (item, qty) => {
+    const quantity = Number(qty)
+    const product = { ...item, quantity };
+    dispatch({ type: "CART_ADD_ITEM", payload: product });
   };
 
   return (
@@ -53,11 +59,24 @@ export default function cart() {
                         &nbsp;{item.name}
                       </Link>
                     </td>
-                    <td className="p-5 text-right">{item.quantity}</td>
+                    <td className="p-5 text-right">
+                      <select
+                        value={item.quantity}
+                        onChange={(e) =>
+                          updateCarthandler(item, e.target.value)
+                        }
+                      >
+                        {[...Array(item.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
                     <td className="p-5 text-right">${item.price}</td>
                     <td className="p-5 text-center">
                       <button onClick={() => removeItemHandler(item)}>
-                      <XCircleIcon className="h-6 w-6 text-red-400"/>
+                        <XCircleIcon className="h-6 w-6 text-red-400" />
                       </button>
                     </td>
                   </tr>
