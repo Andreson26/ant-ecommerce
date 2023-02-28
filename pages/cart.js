@@ -96,7 +96,8 @@ import dynamic from "next/dynamic";
               <li>
                 <button
                   className="primary-button w-full"
-                  onClick={() => router.push("/shipping")}
+                  //onClick={() => router.push("/shipping")}
+                  onClick={() => router.push('login?redirect=shipping')}
                 >
                   Proceed to Checkout
                 </button>
