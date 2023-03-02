@@ -1,23 +1,26 @@
-import  { useState, useEffect, useContext} from "react";
+import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import  { Store }  from "@/utils/Store";
+import { Store } from "@/utils/Store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSession } from "next-auth/react";
 
 export default function Layout({ children, title }) {
-    const { state } = useContext(Store);
-    const { cart } = state;
-    const [year, setYear] = useState();
-    const [cartItemsCount, setCartItemsCount] = useState(0);
+  const { state } = useContext(Store);
+  const { cart } = state;
+  const [year, setYear] = useState();
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  const { status, data: session } = useSession();
 
-    useEffect(() => {
-       setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
-       
-        const interval = setInterval(() => {
-            setYear(new Date().getFullYear())
-        }, 1000)
-        return () => clearInterval(interval)
-        
-    }, [cart.cartItems])
+  useEffect(() => {
+    setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
+
+    const interval = setInterval(() => {
+      setYear(new Date().getFullYear());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [cart.cartItems]);
 
   return (
     <>
@@ -28,6 +31,8 @@ export default function Layout({ children, title }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <ToastContainer position="bottom-center" limit={1} />
+
       <div className="flex min-h-screen flex-col justify-between">
         <header>
           <nav className="flex h-12 items-center px-4 justify-between shadow-md">
@@ -37,17 +42,23 @@ export default function Layout({ children, title }) {
             <div className="flex">
               <Link href="/cart">
                 <p className="p-2">
-                    Cart
-                    {cartItemsCount > 0 && (
-                        <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
-                            {cartItemsCount}
-                        </span>
+                  Cart
+                  {cartItemsCount > 0 && (
+                    <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
+                      {cartItemsCount}
+                    </span>
                   )}
                 </p>
               </Link>
-              <Link href="/login">
-                <p className="p-2">Login</p>
-              </Link>
+              {status === "loading" ? (
+                <p className="p-2">Loading...</p>
+              ) : session?.user ? (
+                session.user.name
+              ) : (
+                <Link href="/login">
+                  <p className="p-2">Login</p>
+                </Link>
+              )}
             </div>
           </nav>
         </header>
@@ -55,8 +66,8 @@ export default function Layout({ children, title }) {
         <main className="container m-auto mt-4 px-4">{children}</main>
 
         <footer className="flex h-10 justify-center items-center shadow-inner">
-          <p>Copyright © {year}  ANT Ecommerce</p>
-          </footer>
+          <p>Copyright © {year} ANT Ecommerce</p>
+        </footer>
       </div>
     </>
   );
