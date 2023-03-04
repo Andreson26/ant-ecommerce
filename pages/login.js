@@ -11,12 +11,12 @@ export default function login() {
   const { data: session } = useSession();
   const router = useRouter();
   const { redirect } = router.query;
-console.log(session)
+  console.log(session);
   useEffect(() => {
-    if(session?.user) {
-      router.push(redirect || "/")
+    if (session?.user) {
+      router.push(redirect || "/");
     }
-  }, [router, session, redirect])
+  }, [router, session, redirect]);
 
   const {
     register,
@@ -30,13 +30,12 @@ console.log(session)
         redirect: false,
         email,
         password,
-      })
-      if(result.error) {
-        toast.error(getError(result.error))
+      });
+      if (result.error) {
+        toast.error(getError(result.error));
       }
-
-    }catch(err){
-     console.log( toast.err(getError(err)));
+    } catch (err) {
+      console.log(toast.err(getError(err)));
     }
   };
 
@@ -57,18 +56,20 @@ console.log(session)
           <input
             type="email"
             {...register("email", {
-                required:"please enter your email",
-                pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "invalid email address"
-                },
+              required: "please enter your email",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "invalid email address",
+              },
             })}
             id="email"
             name="email"
             autoFocus
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent"
           />
-          {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="mb-4">
@@ -81,17 +82,22 @@ console.log(session)
           <input
             type="password"
             {...register("password", {
-                required: "please enter your password",
-                minLength: { value: 6, message: "password must be at least 6 characters" },
+              required: "please enter your password",
+              minLength: {
+                value: 6,
+                message: "password must be at least 6 characters",
+              },
             })}
             id="password"
             name="password"
             autoFocus
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent"
           />
-            {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
         </div>
-        
+
         <div className="mb-4">
           <button className="primary-button">Login</button>
         </div>
