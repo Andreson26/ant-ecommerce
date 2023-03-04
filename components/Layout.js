@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 
 export default function Layout({ children, title }) {
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const [year, setYear] = useState();
   const [cartItemsCount, setCartItemsCount] = useState(0);
