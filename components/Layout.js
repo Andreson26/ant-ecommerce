@@ -61,7 +61,7 @@ export default function Layout({ children, title }) {
               </Link>
               {status === "loading" ? (
                 <p className="p-2">Loading...</p>
-              ) : session?.user ? (
+              ) : session.user ? (
                 <Menu as="div" className="relative inline-block">
                   <Menu.Button className="text-blue-600 p-2">
                     {session.user.name}
