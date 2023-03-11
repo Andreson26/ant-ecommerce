@@ -1,4 +1,4 @@
-import CheckouWizard from "@/components/CheckouWizard";
+import CheckouWizard from "@/components/CheckoutWizard";
 import Layout from "@/components/Layout";
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";

@@ -11,7 +11,7 @@ export default function login() {
   const { data: session } = useSession();
   const router = useRouter();
   const { redirect } = router.query;
-  console.log(session);
+
   useEffect(() => {
     if (session?.user) {
       router.push(redirect || "/");

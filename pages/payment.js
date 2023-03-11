@@ -1,4 +1,4 @@
-import CheckouWizard from "@/components/CheckouWizard";
+import CheckoutWizard from "@/components/CheckoutWizard";
 import Layout from "@/components/Layout";
 import React, { useState, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -37,7 +37,7 @@ export default function payment() {
   }, [paymemtMethod, router, shippingAddress.address]);
   return (
     <Layout title="Payment Method">
-      <CheckouWizard activeStep={2} />
+      <CheckoutWizard activeStep={2} />
       <form className="mx-auto max-w-screen-md" onSubmit={submitHandler}>
         <h1 className="mb-4 text-xl">Payment Method</h1>
         {["Paypal", "Stripe", "Cash"].map((payment) => (
@@ -71,3 +71,5 @@ export default function payment() {
     </Layout>
   );
 }
+
+payment.auth = true;
