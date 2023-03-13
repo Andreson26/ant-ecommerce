@@ -5,7 +5,7 @@ import db from '@/utils/db';
 const handler = async (req, res) => {
   await db.connect();
   const session = await getSession({ req });
-  console.log(session)
+  //console.log(session)
   if (!session) {
     return res.status(401).send('signing required');
   }
@@ -15,7 +15,7 @@ const handler = async (req, res) => {
   await db.connect();
   const newOrder = new Order({
     ...req.body,
-    user: user.id,
+    user: user._id,
   });
 
   const order = await newOrder.save();
