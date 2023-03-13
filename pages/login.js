@@ -102,7 +102,7 @@ export default function login() {
           <button className="primary-button">Login</button>
         </div>
         <div className="mb-4">
-          Don&apos;t have an account? <Link href="/register">Register</Link>
+          Don&apos;t have an account? <Link href={`/register?redirect=${redirect || '/'}`}>Register</Link>
         </div>
       </form>
     </Layout>
