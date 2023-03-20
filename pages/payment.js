@@ -72,4 +72,4 @@ export default function Payment() {
   );
 }
 
-payment.auth = true;
+Payment.auth = true;
