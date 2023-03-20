@@ -9,7 +9,7 @@ import { getError } from '@/utils/error'
 import axios from 'axios'
 
 
-export default function register() {
+export default function Register() {
     const {data: session} = useSession()
 
     const router = useRouter()

@@ -6,7 +6,7 @@ import { Store } from "@/utils/Store";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
-export default function shipping() {
+export default function Shipping() {
   const {
     handleSubmit,
     register,

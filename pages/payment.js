@@ -6,7 +6,7 @@ import { Store } from "@/utils/Store";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
-export default function payment() {
+export default function Payment() {
   const [selectPaymentMethod, setSelectPaymentMethod] = useState("");
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
@@ -47,7 +47,7 @@ export default function payment() {
               id={payment}
               name="paymentMethod"
               checked={selectPaymentMethod === payment}
-              onChange={(e) => setSelectPaymentMethod(payment)}
+              onChange={() => setSelectPaymentMethod(payment)}
               className="p-2 outline-none focus:ring-0"
             />
             <label htmlFor={payment} className="p-2">

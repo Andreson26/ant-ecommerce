@@ -6,7 +6,7 @@ import axios from "axios";
 import { getError } from "@/utils/error";
 import Layout from "@/components/Layout";
 
-export default function profile() {
+export default function Profile() {
   const { data: session } = useSession();
 
   const {
@@ -24,7 +24,7 @@ export default function profile() {
 
   const submitHandler = async ({ name, email, password }) => {
     try {
-      const { data } = await axios.put("/api/auth/update", {
+      await axios.put("/api/auth/update", {
         name,
         email,
         password,
