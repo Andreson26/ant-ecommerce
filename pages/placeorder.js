@@ -46,7 +46,6 @@ export default function PlaceOrder() {
         taxPrice,
         totalPrice,
       });
-      console.log(data)
       setLoading(false);
       dispatch({ type: 'CART_CLEAR_ITEMS' });
       Cookies.set(

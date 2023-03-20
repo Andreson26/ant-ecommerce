@@ -50,7 +50,7 @@ function OrderScreen() {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
     };
-    if (!order._id || successPay || (order._id && order._id !== orderId)) {
+    if(!order._id || successPay || (order._id && order._id !== orderId)) {
       fetchOrder();
       if(successPay) {
         dispatch({ type: 'PAY_RESET' });
@@ -192,7 +192,7 @@ function OrderScreen() {
             </div>
           </div>
           <div>
-            <div className="card  p-5">
+            <div className="card  p-5 w-full">
               <h2 className="mb-2 text-lg">Order Summary</h2>
               <ul>
                 <li>
@@ -223,7 +223,7 @@ function OrderScreen() {
                   <li>
                     {isPending ? (<div>Loading...</div>
                     ) : (
-                      <div className="w-full">
+                      <div className="w-auto">
                         <PayPalButtons createOrder={createOrder} onApprove={onApprove} onError={onError}></PayPalButtons>
                       </div>
                     )}
