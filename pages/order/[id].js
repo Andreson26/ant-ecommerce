@@ -55,7 +55,7 @@ function OrderScreen() {
       if(successPay) {
         dispatch({ type: 'PAY_RESET' });
       }else {
-        const loadinScript = async () => {
+        const loadingScript = async () => {
           const { data: clientId } = await axios.get('/api/keys/paypal');
           paypalDispatch({
             type: 'resetOptions',
@@ -66,7 +66,7 @@ function OrderScreen() {
           });
           paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
         }
-        loadinScript();
+        loadingScript();
       }
     }
   }, [order, orderId, successPay, paypalDispatch]);

@@ -6,7 +6,7 @@ import db from '@/utils/db'
 const handler = async (req, res) => {
     const session = await getSession({ req });
     if (!session) {
-        return res.status(401).send('Error: signin required');
+        return res.status(401).send('Error: signing required');
     }
     await db.connect();
     const order = await Order.findById(req.query.id);
